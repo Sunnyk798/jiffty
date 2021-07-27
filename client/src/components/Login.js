@@ -1,10 +1,12 @@
 import "./Login.css";
 
-export default function Login() {
+export default function Login({ setLoggedIn }) {
 	return (
 		<div className='login-page'>
 			<div className='large-logo'>Jiffty</div>
-			<button className='login-btn'>Login with Google</button>
+			<button onClick={() => setLoggedIn(true)} className='login-btn'>
+				Login with Google
+			</button>
 		</div>
 	);
 }

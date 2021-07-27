@@ -9,4 +9,9 @@
 	font-weight: 600;
 	font-size: 24px;
 	place-items: center;
+	cursor: pointer;
+}
+
+.sidenav > div:hover {
+	color: var(--white);
 }
