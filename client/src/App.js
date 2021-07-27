@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import Topnav from "./components/Topnav";
+import Sidenav from "./components/Sidenav";
+import VideoList from "./components/VideoList";
+import Profile from "./components/Profile";
+import Login from "./components/Login";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [page, setPage] = useState("home");
+	if (!loggedIn) return <Login setLoggedIn={setLoggedIn} />;
+	return (
+		<div className='App'>
+			<Topnav />
+			<div className='container'>
+				<Sidenav setPage={setPage} />
+				{page === "home" && <VideoList title='Latest Videos' />}
+				{page === "profile" && <Profile name='Gunjan Raj Tiwari' />}
+				{page === "saved" && <VideoList title='Latest Videos' />}
+			</div>
+		</div>
+	);
 }
 
 export default App;

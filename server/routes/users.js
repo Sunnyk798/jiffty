@@ -3,6 +3,8 @@ const router = express.Router();
 
 const User = require("../models/User");
 
+<<<<<<< HEAD
+=======
 const dummy_users = [
 	{
 		id: 1,
@@ -16,6 +18,7 @@ const dummy_users = [
 {
 }
 
+>>>>>>> 2bbc655f93f7b4b472034f57f055868f8b88675d
 router.get("/", async (req, res) => {
 	try {
 		const users = await User.find();

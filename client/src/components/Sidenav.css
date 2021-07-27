@@ -1,0 +1,17 @@
+.sidenav {
+	width: 60px;
+	background-color: var(--black-alt);
+}
+
+.sidenav > div {
+	display: grid;
+	height: 60px;
+	font-weight: 600;
+	font-size: 24px;
+	place-items: center;
+	cursor: pointer;
+}
+
+.sidenav > div:hover {
+	color: var(--white);
+}
