@@ -10,7 +10,7 @@ const dummy_users = [
 	},
 	{
 		id: 2,
-		name: "Sandesh",
+		name: "Sandesh Dhungana",
 	},
 ];
 {
