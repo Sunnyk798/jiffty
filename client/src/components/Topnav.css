@@ -1,0 +1,18 @@
+.navbar {
+	padding: 0.5rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.searchbar {
+	flex: 2;
+	max-width: 400px;
+	min-width: 80px;
+	padding: 0.5rem 0.8rem;
+	border-radius: 50px;
+	border: none;
+	color: var(--white);
+	background-color: var(--black-alt);
+	outline: none;
+}
