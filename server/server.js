@@ -12,7 +12,7 @@ connectDB();
 app.use(express.json());
 
 app.use("/users", userRouter);
-app.use("/", videoRouter);
+app.use("/videos", videoRouter);
 
 app.listen(PORT, err => {
 	if (err) console.log("Server failed ...");
