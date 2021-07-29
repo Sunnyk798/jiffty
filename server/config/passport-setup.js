@@ -16,9 +16,9 @@ passport.use(new GoogleStrategy({
             } else {
                 const user = { name: profile.displayName, email: profile.emails[0].value, profile_pic_url: profile._json.picture };
                 new User(user).save()
-                    .then((res) => {
-                        console.log(res);
-                        done(null, signed_user);
+                    .then((new_user) => {
+                        console.log(new_user);
+                        done(null, new_user);
                     })
                     .catch((err) => {
                         console.log(err);
