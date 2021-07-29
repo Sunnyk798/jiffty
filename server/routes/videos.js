@@ -3,17 +3,6 @@ const router = express.Router();
 
 const Video = require("../models/Video");
 
-const dummy_videos = [
-	{
-		id: 1,
-		name: "NodeJs",
-	},
-	{
-		id: 2,
-		name: "React",
-	},
-];
-
 router.post("/upload", async (req, res) => {
 	try {
 		const videoData = req.body;
@@ -29,11 +18,15 @@ router.post("/upload", async (req, res) => {
 router.get("/", async (req, res) => {
 	try {
 		const videos = await Video.find();
-		res.json({ video });
+		res.json(videos);
 	} catch (e) {
 		console.log(e);
 		res.json({ err: e });
 	}
+});
+
+router.get("/:id", (req, res) => {
+	res.send(id);
 });
 
 module.exports = router;
