@@ -6,7 +6,13 @@ router.get("/google", passport.authenticate('google', {
 }));
 
 router.get("/google/redirect", passport.authenticate('google'), (req, res) => {
-    res.send("Great! You are signed in. Tell me what your interests are!");
+    res.redirect("/users/user");
 })
+
+
+router.get("/logout", (req, res) => {
+    req.logout();
+    res.send("You are logged out");
+});
 
 module.exports = router;
