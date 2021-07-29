@@ -10,3 +10,8 @@
 	display: grid;
 	grid-template-columns: min-content auto;
 }
+
+.container > div {
+	height: calc(100vh - 67px);
+	overflow-y: auto;
+}
