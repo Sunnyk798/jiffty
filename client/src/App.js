@@ -5,6 +5,7 @@ import Sidenav from "./components/Sidenav";
 import VideoList from "./components/VideoList";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
+import Upload from "./components/Upload";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -17,7 +18,8 @@ function App() {
 				<Sidenav setPage={setPage} />
 				{page === "home" && <VideoList title='Latest Videos' />}
 				{page === "profile" && <Profile name='Gunjan Raj Tiwari' />}
-				{page === "saved" && <VideoList title='Latest Videos' />}
+				{page === "saved" && <VideoList title='Saved Videos' />}
+				{page === "upload" && <Upload />}
 			</div>
 		</div>
 	);
