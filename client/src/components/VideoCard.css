@@ -1,3 +1,7 @@
+.videoCard {
+	max-width: 300px;
+}
+
 .img {
 	height: 180px;
 	width: 280px;

@@ -14,6 +14,10 @@ const VideoSchema = mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
+		videoPath: {
+			type: String,
+			required: true,
+		},
 	},
 	{ timestamps: true }
 );
