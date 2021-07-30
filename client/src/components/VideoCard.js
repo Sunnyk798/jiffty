@@ -1,10 +1,11 @@
 import "./VideoCard.css";
 
-export default function VideoCard() {
+export default function VideoCard({ video }) {
 	return (
-		<div className='outer'>
+		<div className='videoCard'>
 			<div className='img'>NODE</div>
-			<p className='title'>Learn NodeJS</p>
+			<p className='title'>{video.title}</p>
+			<small>{video.description}</small>
 		</div>
 	);
 }
