@@ -7,7 +7,7 @@
 
 .searchbar {
 	flex: 2;
-	max-width: 400px;
+	max-width: 320px;
 	min-width: 80px;
 	padding: 0.5rem 0.8rem;
 	border-radius: 50px;

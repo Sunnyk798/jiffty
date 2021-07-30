@@ -1,6 +1,11 @@
+import { useState } from "react";
 import "./Upload.css";
 
 export default function Upload() {
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [video, setVideo] = useState(null);
+
 	return (
 		<div className='upload'>
 			<h3>Upload video</h3>

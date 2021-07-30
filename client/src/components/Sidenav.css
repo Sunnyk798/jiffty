@@ -33,6 +33,7 @@
 
 	.sidenav > div {
 		place-items: unset;
+		align-items: center;
 		grid-template-columns: 60px auto;
 	}
 
