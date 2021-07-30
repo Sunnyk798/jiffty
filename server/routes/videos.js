@@ -7,25 +7,6 @@ var upload = multer({
 	dest: "media/",
 });
 
-const dummy = [
-	{
-		id: 1,
-		name: "NodeJS Tutorial",
-	},
-	{
-		id: 2,
-		name: "React Tutorial",
-	},
-	{
-		id: 3,
-		name: "Figma Tutorial",
-	},
-	{
-		id: 4,
-		name: "HTML CSS Tutorial",
-	},
-];
-
 router.post("/upload", upload.single("video"), async (req, res) => {
 	try {
 		const videoData = req.body;

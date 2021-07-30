@@ -1,9 +1,22 @@
-:root {
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap");
+/* Dark theme */
+/* :root {
 	--black: #1c1c1e;
 	--black-alt: #26262e;
 	--grey: #cccccf;
 	--white: #fff;
 	--green: rgb(14, 182, 22);
+  --danger: red;
+} */
+
+/* Light theme */
+:root {
+	--black: #fff;
+	--black-alt: #dddddf;
+	--grey: #26262e;
+	--white: #1c1c1e;
+	--green: rgb(14, 182, 22);
+	--danger: red;
 }
 
 * {
@@ -15,8 +28,9 @@ body {
 	height: 100vh;
 	overflow: hidden;
 	color: var(--grey);
-	background-color: #1c1c1e;
-	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	background-color: var(--black);
+	font-family: "Lato", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

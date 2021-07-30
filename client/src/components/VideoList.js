@@ -19,7 +19,7 @@ export default function VideoList({ title }) {
 			<div>{title}</div>
 			<div className='list'>
 				{videos.map(video => {
-					return <VideoCard video={video} />;
+					return <VideoCard key={video._id} video={video} />;
 				})}
 			</div>
 		</div>

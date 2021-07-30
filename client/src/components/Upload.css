@@ -22,11 +22,29 @@ textarea {
 .title-upload,
 .desc-upload {
 	background-color: var(--black-alt);
-	padding: 0.4rem 0.6rem;
+	padding: 0.6rem;
 	border-radius: 0.5em;
+	font-family: inherit;
 }
 
 .desc-upload {
 	height: 20em;
 	resize: vertical;
+}
+
+.upload-btn {
+	height: 40px;
+	max-width: 200px;
+	background-color: var(--green);
+	color: #fff;
+	font-weight: bold;
+	letter-spacing: 2px;
+	border-radius: 50px;
+	margin: 1em 0;
+}
+
+.upload small {
+	font-size: 0.7rem;
+	font-weight: 300;
+	color: var(--danger);
 }

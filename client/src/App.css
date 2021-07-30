@@ -12,6 +12,6 @@
 }
 
 .container > div {
-	height: calc(100vh - 67px);
+	height: calc(100vh - 60px);
 	overflow-y: auto;
 }
