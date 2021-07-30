@@ -4,10 +4,10 @@ const router = express.Router();
 const User = require("../models/User");
 const authCheck = require("./auth-check");
 
-router.get("/", authCheck, async(req, res) => {
+router.get("/", async(req, res) => {
     try {
         const users = await User.find();
-        res.json(users);
+        res.send(users);
     } catch (e) {
         console.log(e);
         res.json({ err: e });

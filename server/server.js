@@ -1,6 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 
+const bodyParser = require("body-parser");
+const cors = require('cors');
+
+
+
+
 const connectDB = require("./db");
 const usersRouter = require("./routes/users");
 const userRouter = require("./routes/user");
@@ -13,9 +19,18 @@ const passport = require('passport');
 const app = express();
 const PORT = process.env.PORT || 5050;
 
-connectDB();
-
 app.use(express.json());
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors({
+    cors: true,
+    origins: ["http://127.0.0.1:3000"],
+    method: ["GET", "POST", "PUT"],
+    header: true
+}));
+
+connectDB();
 
 app.use(cookieSession({
     maxAge: 60 * 60 * 1000,
