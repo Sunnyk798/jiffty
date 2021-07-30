@@ -9,6 +9,10 @@ var upload = multer({
 
 router.post("/upload", upload.single("video"), async (req, res) => {
 	try {
+		if (!req.file) {
+			console.log("No file");
+			return res.json({ err: "No file" });
+		}
 		const videoData = req.body;
 		videoData.videoPath = req.file.filename;
 		const video = new Video(videoData);
@@ -16,7 +20,7 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 		res.send("ok");
 	} catch (e) {
 		console.log(e);
-		res.json({ err: e });
+		res.status(400).json({ err: e });
 	}
 });
 
@@ -26,7 +30,7 @@ router.get("/", async (req, res) => {
 		res.json(videos);
 	} catch (e) {
 		console.log(e);
-		res.json({ err: e });
+		res.status(400).json({ err: e });
 	}
 });
 

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import "./Upload.css";
 
 export default function Upload() {
@@ -8,11 +9,22 @@ export default function Upload() {
 		formState: { errors },
 	} = useForm();
 
-	function submitHandler(data) {
-		console.log(data);
+	async function submitHandler(data) {
+		try {
+			let url = "/videos/upload";
+			let postData = new FormData();
+			postData.append("title", data.title);
+			postData.append("description", data.description);
+			postData.append("video", data.video[0]);
+
+			const response = await axios.post(url, postData);
+			console.log(response);
+			alert("Video uploaded successfully!");
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
-	console.log(errors);
 	return (
 		<div className='upload'>
 			<h3>Upload video</h3>
@@ -27,7 +39,6 @@ export default function Upload() {
 					id='video-upload'
 					{...register("video", {
 						required: "This field is required.",
-						maxLength: 150,
 					})}
 				/>
 
@@ -42,7 +53,10 @@ export default function Upload() {
 					maxLength='200'
 					className='title-upload'
 					id='title-upload'
-					{...register("title", { required: "This field is required." })}
+					{...register("title", {
+						required: "This field is required.",
+						maxLength: { value: 150, message: "Max length exceeded." },
+					})}
 				/>
 
 				{errors.title && <small>{errors.title.message}</small>}
