@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 
 const connectDB = require("./db");
-const userRouter = require("./routes/users");
+const usersRouter = require("./routes/users");
+const userRouter = require("./routes/user");
 const videoRouter = require("./routes/videos");
 const authRouter = require("./routes/auth-routes");
 const passportSetup = require("./config/passport-setup");
@@ -24,7 +25,8 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/users", userRouter);
+app.use("/users", usersRouter);
+app.use("/user", userRouter);
 app.use("/videos", videoRouter);
 app.use('/auth', authRouter);
 

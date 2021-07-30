@@ -1,6 +1,6 @@
 const authCheck = (req, res, next) => {
     if (!req.user) {
-        res.send("You are logged out");
+        res.send("Please login to view this page");
     } else {
         next();
     }
