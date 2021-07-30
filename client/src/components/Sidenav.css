@@ -18,7 +18,7 @@
 }
 
 .sidenav small {
-	font-weight: 200;
+	font-weight: 300;
 	font-size: 0.7rem;
 }
 
@@ -43,5 +43,6 @@
 
 	.sidenav small {
 		font-size: 1rem;
+		font-weight: normal;
 	}
 }
