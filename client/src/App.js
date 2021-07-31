@@ -16,10 +16,12 @@ function App() {
 			<Topnav />
 			<div className='container'>
 				<Sidenav setPage={setPage} />
-				{page === "home" && <VideoList title='Latest Videos' />}
-				{page === "profile" && <Profile name='Gunjan Raj Tiwari' />}
-				{page === "saved" && <VideoList title='Saved Videos' />}
-				{page === "upload" && <Upload />}
+				<div>
+					{page === "home" && <VideoList title='Latest Videos' />}
+					{page === "profile" && <Profile name='Gunjan Raj Tiwari' />}
+					{page === "saved" && <VideoList title='Saved Videos' />}
+					{page === "upload" && <Upload />}
+				</div>
 			</div>
 		</div>
 	);

@@ -2,14 +2,41 @@
 	max-width: 300px;
 }
 
-.img {
-	height: 180px;
-	width: 280px;
+.videoCard .poster {
+	height: 160px;
+	width: 240px;
 	max-width: 320px;
 	text-align: center;
-	padding-top: 20%;
+	/* padding-top: 20%; */
 	font-size: 42px;
 	color: white;
 	border-radius: 20px;
-	background: linear-gradient(green, 30%, lime);
+	background: var(--black-alt);
+	overflow: hidden;
+}
+
+.videoCard video {
+	height: 160px;
+	width: 240px;
+}
+
+.playing {
+	margin: 2rem auto;
+}
+
+.playing .poster {
+	width: 100%;
+	max-width: 1024px;
+}
+
+.playing video {
+	max-width: 100%;
+}
+
+.thumbnail {
+	height: 100%;
+	font-size: 4rem;
+	display: grid;
+	place-items: center;
+	color: var(--grey);
 }

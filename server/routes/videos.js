@@ -4,7 +4,7 @@ const multer = require("multer");
 const Video = require("../models/Video");
 
 var upload = multer({
-	dest: "media/",
+	dest: "../client/public/media",
 });
 
 router.post("/upload", upload.single("video"), async (req, res) => {
