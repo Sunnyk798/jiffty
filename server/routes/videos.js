@@ -2,10 +2,33 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const Video = require("../models/Video");
+const { initializeApp, cert } = require("firebase-admin/app");
+const { getStorage } = require("firebase-admin/storage");
+const { getFirestore } = require("firebase-admin/firestore");
+const serviceAccount = require("../jiffty-service-account.json");
 
-var upload = multer({
-	dest: "../client/public/media",
+// ---- Firebase Setup ----
+initializeApp({
+	credential: cert(serviceAccount),
+	storageBucket: "jiffty.appspot.com",
 });
+const db = getFirestore();
+const bucket = getStorage().bucket();
+
+// ---- Multer Setup ----
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, "media");
+	},
+	filename: (req, file, cb) => {
+		const { originalname } = file;
+		cb(null, `${Date.now()}-${originalname}`);
+	},
+});
+
+const upload = multer({ storage });
+const videoQueue = [];
+var isUploaderFree = true;
 
 router.post("/upload", upload.single("video"), async (req, res) => {
 	try {
@@ -15,6 +38,8 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 		}
 		const videoData = req.body;
 		videoData.videoPath = req.file.filename;
+        videoQueue.push(videoData.videoPath);
+	    if (isUploaderFree) uploadToCloud(videoQueue);
 		const video = new Video(videoData);
 		await video.save();
 		res.send("ok");
@@ -23,6 +48,24 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 		res.status(400).json({ err: e });
 	}
 });
+
+// cloud uploading
+async function uploadToCloud(videoQueue) {
+	while (videoQueue.length > 0) {
+        try{
+            console.log("Uploading " + videoQueue[0]);
+            await bucket.upload("media/" + videoQueue[0], {
+                resumable: false,
+                gzip: true,
+            });
+
+            videoQueue.shift();
+        } catch(e){
+            console.log(e);
+        }
+	}
+}
+
 
 router.get("/", async (req, res) => {
 	try {
@@ -34,8 +77,22 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.get("/:id", (req, res) => {
-	res.send(id);
+router.get("/:id", async (req, res) => {
+	try {
+		const video = await Video.findById(req.params.id);
+		res.json(video._doc);
+	} catch (e) {
+		console.log(e);
+		res.status(400).json({ err: e });
+	}
 });
+
+// setInterval(() => {
+//     if (isUploaderFree && videoQueue.length > 0) {
+//         isUploaderFree = false;
+//         uploadToCloud(videoQueue);
+//         isUploaderFree = true;
+//     }
+// }, 60000);
 
 module.exports = router;

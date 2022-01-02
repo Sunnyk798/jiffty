@@ -1,16 +1,22 @@
 import "./Profile.css";
 
-export default function Profile({ name }) {
+export default function Profile({ user }) {
+    console.log(user)
 	return (
-		<div className='profile'>
-			<div className='avatar'>Avatar</div>
-			<div>
-				<h2>{name}</h2>
-				<div className='subs'>
-					<span>1.8M</span> Subscribers
-				</div>
-				<button>SUBSCRIBE</button>
-			</div>
-		</div>
+        <div>
+            <img src={user.coverPicture} className="cover" alt={user.name} />
+            <div className='profile'>
+                <img className='avatar' src={user.profilePicture} alt={user.name}/>
+                <div>
+                    <h2>{user.name}</h2>
+                    <p>{user.tagline}</p>
+                    <div className='subs'>
+                        <span>{user.followers.length}</span> Followers 
+                        <span> {user.following.length}</span> Following
+                    </div>
+                    <button>Follow</button>
+                </div>
+            </div>
+        </div>
 	);
 }

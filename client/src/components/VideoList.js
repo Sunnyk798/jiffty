@@ -4,7 +4,6 @@ import "./VideoList.css";
 
 export default function VideoList({ title }) {
 	const [videos, setVideos] = useState([]);
-	const [playingVideo, setPlayingVideo] = useState(null);
 
 	useEffect(() => {
 		fetch("/videos")
@@ -24,8 +23,6 @@ export default function VideoList({ title }) {
 						<VideoCard
 							key={video._id}
 							video={video}
-							setVideo={setPlayingVideo}
-							playing={playingVideo?._id === video._id}
 						/>
 					);
 				})}

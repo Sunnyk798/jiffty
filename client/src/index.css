@@ -11,12 +11,12 @@
 
 /* Light theme */
 :root {
-	--black: #fff;
+	--black: #f5f3f3;
 	--black-alt: #dddddf;
 	--grey: #26262e;
 	--white: #1c1c1e;
 	--green: rgb(14, 182, 22);
-	--danger: red;
+	--danger: rgb(224, 34, 34);
 }
 
 * {

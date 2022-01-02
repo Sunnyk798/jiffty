@@ -1,22 +1,26 @@
-import { AiOutlinePlaySquare } from "react-icons/ai";
+import { AiFillPlayCircle } from "react-icons/ai";
 import "./VideoCard.css";
+import { useNavigate } from 'react-router-dom';
 
-export default function VideoCard({ video, setVideo, playing }) {
+function getUrl(name){
+    return `https://firebasestorage.googleapis.com/v0/b/jiffty.appspot.com/o/${name}?alt=media`
+}
+
+export default function VideoCard({ video }) {
+    const navigate = useNavigate();
+
+    const handleVideoPlay = (e) => {
+        navigate(`watch/${video._id}`)
+    }
+
 	return (
-		<div
-			className={playing ? "playing" : "videoCard"}
-			onClick={() => setVideo(video)}>
-			<div className='poster'>
-				{playing ? (
-					<video src={"/media/" + video.videoPath} controls />
-				) : (
-					<div className='thumbnail'>
-						<AiOutlinePlaySquare />
-					</div>
-				)}
+		<div className="videoCard">
+			<div className='poster' onClick={handleVideoPlay}>
+                <AiFillPlayCircle className="playicon" />
+				<video src={getUrl(video.videoPath)}/>
 			</div>
 			<p className='title'>{video.title}</p>
-			<small>{video.description}</small>
+			<small>{new Date(video.createdAt).toDateString()}</small>
 		</div>
 	);
 }

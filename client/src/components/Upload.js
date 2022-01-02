@@ -3,7 +3,7 @@ import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import axios from "axios";
 import "./Upload.css";
 
-export default function Upload() {
+export default function Upload({user}) {
 	const {
 		register,
 		handleSubmit,
@@ -20,6 +20,7 @@ export default function Upload() {
 			postData.append("title", data.title);
 			postData.append("description", data.description);
 			postData.append("video", data.video[0]);
+            postData.append('author', user)
 
 			const response = await axios.post(url, postData);
 			console.log(response);

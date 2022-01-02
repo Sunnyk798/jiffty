@@ -10,9 +10,10 @@
 	/* padding-top: 20%; */
 	font-size: 42px;
 	color: white;
-	border-radius: 20px;
+	border-radius: 8px;
 	background: var(--black-alt);
 	overflow: hidden;
+    position: relative;
 }
 
 .videoCard video {
@@ -20,23 +21,10 @@
 	width: 240px;
 }
 
-.playing {
-	margin: 2rem auto;
-}
-
-.playing .poster {
-	width: 100%;
-	max-width: 1024px;
-}
-
-.playing video {
-	max-width: 100%;
-}
-
-.thumbnail {
-	height: 100%;
-	font-size: 4rem;
-	display: grid;
-	place-items: center;
-	color: var(--grey);
+.playicon{
+    position: absolute;
+    top: 36%;
+    left: 40%;
+    color: var(--green);
+    font-size: 1.2em;
 }

@@ -12,8 +12,12 @@ const VideoSchema = mongoose.Schema(
 		},
 		views: {
 			type: Number,
-			default: 0,
+			default: 92,
 		},
+        author: {
+            type: String,
+            required: true
+        },
 		videoPath: {
 			type: String,
 			required: true,
