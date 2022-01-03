@@ -6,7 +6,7 @@ export default function VideoList({ title }) {
 	const [videos, setVideos] = useState([]);
 
 	useEffect(() => {
-		fetch("/videos")
+		fetch("/api/videos")
 			.then(res => res.json())
 			.then(result => {
 				console.log(result);
@@ -19,7 +19,12 @@ export default function VideoList({ title }) {
 			<div>{title}</div>
 			<div className='list'>
 				{videos.map(video => {
-					return <VideoCard key={video._id} video={video} />;
+					return (
+						<VideoCard
+							key={video._id}
+							video={video}
+						/>
+					);
 				})}
 			</div>
 		</div>

@@ -54,3 +54,37 @@ textarea {
 	font-weight: 300;
 	color: var(--danger);
 }
+
+.file-flex {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.file-preview {
+	max-height: 120px;
+	border: 1px solid var(--black-alt);
+	border-radius: 4px;
+}
+
+.file-preview video {
+	border-radius: 4px;
+}
+
+.file-upload {
+	display: none;
+}
+
+.upload-ref {
+	margin: 0.8rem 0.8rem 0.8rem 0;
+	width: fit-content;
+	font-size: 2.5rem;
+	display: grid;
+	place-items: center;
+	height: 120px;
+	width: 120px;
+	border: 0.2rem solid var(--black-alt);
+	border-radius: 8px;
+	color: var(--grey);
+}

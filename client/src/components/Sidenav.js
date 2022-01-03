@@ -6,34 +6,35 @@ import {
 	AiOutlineUpload,
 } from "react-icons/ai";
 import "./Sidenav.css";
+import { Link } from "react-router-dom";
 
-export default function Sidenav({ setPage }) {
+export default function Sidenav() {
 	return (
 		<div className='sidenav'>
-			<div onClick={() => setPage("home")}>
+			<Link to="/">
 				<AiOutlineHome className='icon' />
 				<small>Home</small>
-			</div>
+			</Link>
 
-			<div onClick={() => setPage("profile")}>
+			<Link to="/profile">
 				<AiOutlineUser className='icon' />
 				<small>Profile</small>
-			</div>
+			</Link>
 
-			<div onClick={() => setPage("saved")}>
+			<Link to="/saved">
 				<AiOutlineHeart className='icon' />
 				<small>Saved</small>
-			</div>
+			</Link>
 
-			<div>
+			<a href="/">
 				<AiOutlineLogout className='icon' />
 				<small>Logout</small>
-			</div>
+			</a>
 
-			<div className='upload-icon' onClick={() => setPage("upload")}>
+			<Link to="/upload" className="upload-icon">
 				<AiOutlineUpload className='icon' />
 				<small>Upload</small>
-			</div>
+			</Link>
 		</div>
 	);
 }

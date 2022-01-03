@@ -3,7 +3,7 @@
 	background-color: var(--black-alt);
 }
 
-.sidenav > div {
+.sidenav > a {
 	display: grid;
 	place-items: center;
 	height: 60px;
@@ -11,9 +11,11 @@
 	font-size: 1.5rem;
 	cursor: pointer;
 	margin-top: 1rem;
+    text-decoration: none;
+    color: unset;
 }
 
-.sidenav > div:hover {
+.sidenav > a:hover {
 	color: var(--white);
 }
 
@@ -31,7 +33,7 @@
 		width: 160px;
 	}
 
-	.sidenav > div {
+	.sidenav > a {
 		place-items: unset;
 		align-items: center;
 		grid-template-columns: 60px auto;

@@ -2,14 +2,29 @@
 	max-width: 300px;
 }
 
-.img {
-	height: 180px;
-	width: 280px;
+.videoCard .poster {
+	height: 160px;
+	width: 240px;
 	max-width: 320px;
 	text-align: center;
-	padding-top: 20%;
+	/* padding-top: 20%; */
 	font-size: 42px;
 	color: white;
-	border-radius: 20px;
-	background: linear-gradient(green, 30%, lime);
+	border-radius: 8px;
+	background: var(--black-alt);
+	overflow: hidden;
+    position: relative;
+}
+
+.videoCard video {
+	height: 160px;
+	width: 240px;
+}
+
+.playicon{
+    position: absolute;
+    top: 36%;
+    left: 40%;
+    color: var(--green);
+    font-size: 1.2em;
 }

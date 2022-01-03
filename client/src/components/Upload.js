@@ -1,21 +1,26 @@
 import { useForm } from "react-hook-form";
+import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import axios from "axios";
 import "./Upload.css";
 
-export default function Upload() {
+export default function Upload({user}) {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		watch,
 	} = useForm();
+
+	const currentFile = watch("video");
 
 	async function submitHandler(data) {
 		try {
-			let url = "/videos/upload";
+			let url = "/api/videos/upload";
 			let postData = new FormData();
 			postData.append("title", data.title);
 			postData.append("description", data.description);
 			postData.append("video", data.video[0]);
+            postData.append('author', user)
 
 			const response = await axios.post(url, postData);
 			console.log(response);
@@ -30,17 +35,31 @@ export default function Upload() {
 			<h3>Upload video</h3>
 
 			<form onSubmit={handleSubmit(submitHandler)}>
-				<label htmlFor='video-upload'>Video </label>
-
-				<input
-					type='file'
-					accept='video/mp4,video/*'
-					className='file-upload'
-					id='video-upload'
-					{...register("video", {
-						required: "This field is required.",
-					})}
-				/>
+				<div className='file-flex'>
+					<label className='upload-ref' htmlFor='video-upload'>
+						<AiOutlineVideoCameraAdd />
+					</label>
+					<input
+						type='file'
+						accept='video/mp4,video/*'
+						className='file-upload'
+						id='video-upload'
+						{...register("video", {
+							required: "This field is required.",
+						})}
+					/>
+					<div className='file-preview'>
+						{currentFile ? (
+							<video
+								height='120'
+								src={URL.createObjectURL(currentFile[0])}
+								type={currentFile[0].type}
+							/>
+						) : (
+							<p style={{ padding: "0 1rem" }}>Preview</p>
+						)}
+					</div>
+				</div>
 
 				{errors.video && <small>{errors.video.message}</small>}
 
