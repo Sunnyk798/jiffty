@@ -16,7 +16,7 @@ export default function Login({auth, setAuthUser}) {
             }
             console.log(user.photoURL)
 
-            var response = await fetch("/users/register",{
+            var response = await fetch("/api/users/register",{
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

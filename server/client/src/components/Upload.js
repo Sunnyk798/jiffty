@@ -15,7 +15,7 @@ export default function Upload({user}) {
 
 	async function submitHandler(data) {
 		try {
-			let url = "/videos/upload";
+			let url = "/api/videos/upload";
 			let postData = new FormData();
 			postData.append("title", data.title);
 			postData.append("description", data.description);
@@ -41,7 +41,7 @@ export default function Upload({user}) {
 					</label>
 					<input
 						type='file'
-						// accept='video/mp4,video/*'
+						accept='video/mp4,video/*'
 						className='file-upload'
 						id='video-upload'
 						{...register("video", {

@@ -13,8 +13,16 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/users", userRouter);
-app.use("/videos", videoRouter);
+if(process.env.NODE_ENV == "production"){
+    app.use(express.static("client/build"));
+    const path = require("path");
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname,'client',"build","index.html"));
+    })
+}
+
+app.use("/api/users", userRouter);
+app.use("/api/videos", videoRouter);
 
 app.listen(PORT, err => {
 	if (err) console.log("Server failed ...");

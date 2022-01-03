@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const User = require("../models/User");
 const Video = require("../models/Video");
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getStorage } = require("firebase-admin/storage");
@@ -80,7 +81,10 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
 	try {
 		const video = await Video.findById(req.params.id);
-		res.json(video._doc);
+		var result = video._doc;
+        const author = await User.findById(result.author);
+        result.author = author._doc;
+        res.json(result);
 	} catch (e) {
 		console.log(e);
 		res.status(400).json({ err: e });

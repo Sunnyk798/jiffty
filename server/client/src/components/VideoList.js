@@ -6,7 +6,7 @@ export default function VideoList({ title }) {
 	const [videos, setVideos] = useState([]);
 
 	useEffect(() => {
-		fetch("/videos")
+		fetch("/api/videos")
 			.then(res => res.json())
 			.then(result => {
 				console.log(result);

@@ -25,11 +25,37 @@
     font-size: 1.5em;
 }
 
-.player .desc, .channel {
+.player .desc, .author {
     padding: 1em;
 }
 
 .player .title {
     font-size: 1.3em;
     font-weight: 600;
+}
+
+.player .author{
+    display: flex;
+    justify-content: space-between;
+}
+
+.player .stat {
+    font-size: 0.8rem;
+}
+
+.player .avatar {
+    height: 5em;
+    width: 5em;
+    border-radius: 0.5em;
+}
+
+.player .identity {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+}
+
+.sized-box {
+    height: 2em;
+    width: 100%;
 }

@@ -14,7 +14,7 @@ export default function VideoPage() {
     useEffect(() => {
         async function fecthData(){
             try {
-                const response = await fetch(`/videos/${params.id}`);
+                const response = await fetch(`/api/videos/${params.id}`);
                 const video = await response.json();
                 if(video){
                     setCurrentVideo(video)
@@ -55,7 +55,20 @@ export default function VideoPage() {
                 <p>{currentVideo.description}</p>
                 <small>{new Date(currentVideo.createdAt).toDateString()}  |  {currentVideo.views} views</small>
             </div>
-            {/* TODO: Author */}
+            <div className="author">
+                <div className="identity">
+                    <img src={currentVideo.author.profilePicture} alt="avatar" className="avatar" />
+                    <span>{currentVideo.author.name}</span>
+                </div>
+                <div className="stat">
+                    <span>{currentVideo.author.followers.length}</span> Followers | 
+                    <span> {currentVideo.author.following.length}</span> Following
+                    <button className="follow-btn">Follow</button>
+                </div>
+            </div>
+            <div className="sized-box"></div>
+            <div className="sized-box"></div>
+            <div className="sized-box"></div>
 		</div>
     )
 }

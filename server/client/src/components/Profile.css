@@ -14,7 +14,7 @@
     object-fit: cover;
 }
 
-.avatar {
+.profile .avatar {
     transform: translateY(-4em);
 	height: 129px;
 	width: 129px;
@@ -34,7 +34,8 @@
 	text-align: right;
 }
 
-.profile button {
+.follow-btn {
+    display: block;
 	margin-top: 0.5rem;
 	padding: 0.8rem 1.6rem;
 	border: none;
@@ -42,6 +43,7 @@
 	border-radius: 4px;
 	background-color: var(--danger);
 	color: var(--black);
+    font-size: 1rem;
 	font-weight: 600;
 	letter-spacing: 2px;
 }

@@ -14,7 +14,7 @@ export default function Profile({ user }) {
                         <span>{user.followers.length}</span> Followers 
                         <span> {user.following.length}</span> Following
                     </div>
-                    <button>Follow</button>
+                    <button className="follow-btn">Follow</button>
                 </div>
             </div>
         </div>
