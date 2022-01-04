@@ -6,7 +6,7 @@ export default function VideoList({ title }) {
 	const [videos, setVideos] = useState([]);
 
 	useEffect(() => {
-		fetch("/api/videos",{
+		fetch("./api/videos",{
             headers : { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
