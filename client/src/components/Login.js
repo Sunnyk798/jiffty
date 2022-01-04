@@ -18,9 +18,10 @@ export default function Login({auth, setAuthUser}) {
 
             var response = await fetch("/api/users/register",{
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                  },
+                headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                   },
                 body: JSON.stringify(user)
             })
             var userProfile = await response.json();

@@ -14,7 +14,12 @@ export default function VideoPage() {
     useEffect(() => {
         async function fecthData(){
             try {
-                const response = await fetch(`/api/videos/${params.id}`);
+                const response = await fetch(`/api/videos/${params.id}`, {
+                    headers : { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                       }
+                });
                 const video = await response.json();
                 if(video){
                     setCurrentVideo(video)

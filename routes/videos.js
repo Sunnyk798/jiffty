@@ -17,9 +17,9 @@ const db = getFirestore();
 const bucket = getStorage().bucket();
 
 // ---- Multer Setup ----
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage({
 	destination: (req, file, cb) => {
-		cb(null, "media");
+		cb(null, "");
 	},
 	filename: (req, file, cb) => {
 		const { originalname } = file;
@@ -37,10 +37,27 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 			console.log("No file");
 			return res.json({ err: "No file" });
 		}
+
+        const blob = bucket.file(req.file.filename);
+        const blobWriter = blob.createWriteStream({
+            metadata: {
+               contentType: req.file.mimetype
+            }
+         })
+         blobWriter.on('error', (err) => {
+            res.send(err)
+         })
+
+         blobWriter.on('finish', () => {
+             console.log("uploaded");
+            // res.status(200).send("File uploaded.")
+         })
+         blobWriter.end(req.file.buffer);
+
 		const videoData = req.body;
 		videoData.videoPath = req.file.filename;
-        videoQueue.push(videoData.videoPath);
-	    if (isUploaderFree) uploadToCloud(videoQueue);
+        // videoQueue.push(videoData.videoPath);
+	    // if (isUploaderFree) uploadToCloud(videoQueue);
 		const video = new Video(videoData);
 		await video.save();
 		res.send("ok");
@@ -51,21 +68,21 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 });
 
 // cloud uploading
-async function uploadToCloud(videoQueue) {
-	while (videoQueue.length > 0) {
-        try{
-            console.log("Uploading " + videoQueue[0]);
-            await bucket.upload("media/" + videoQueue[0], {
-                resumable: false,
-                gzip: true,
-            });
+// async function uploadToCloud(videoQueue) {
+// 	while (videoQueue.length > 0) {
+//         try{
+//             console.log("Uploading " + videoQueue[0]);
+//             await bucket.upload("media/" + videoQueue[0], {
+//                 resumable: false,
+//                 gzip: true,
+//             });
 
-            videoQueue.shift();
-        } catch(e){
-            console.log(e);
-        }
-	}
-}
+//             videoQueue.shift();
+//         } catch(e){
+//             console.log(e);
+//         }
+// 	}
+// }
 
 
 router.get("/", async (req, res) => {
