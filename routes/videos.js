@@ -42,10 +42,10 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 		}
         req.file.filename = filename(req.file);
         
-        const thumb = new ffmpeg(req.file.filename).takeScreenshots({
-            count: 1,
-            timemarks: ['2']
-        }, '/media')
+        // const thumb = new ffmpeg(req.file.filename).takeScreenshots({
+        //     count: 1,
+        //     timemarks: ['2']
+        // }, '/media')
         
         const blob = bucket.file(req.file.filename);
         const blobWriter = blob.createWriteStream({
@@ -73,7 +73,7 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 		await video.save();
 		res.send("ok");
 	} catch (e) {
-		console.log(e);
+		console.log("here", e);
 		res.status(400).json({ err: e });
 	}
 });

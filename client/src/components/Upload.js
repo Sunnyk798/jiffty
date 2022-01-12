@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import axios from "axios";
 import "./Upload.css";
@@ -10,11 +12,14 @@ export default function Upload({user}) {
 		formState: { errors },
 		watch,
 	} = useForm();
+    const uploadDisabled = useRef(false);
+    const navigate = useNavigate();
 
 	const currentFile = watch("video");
 
 	async function submitHandler(data) {
 		try {
+            uploadDisabled.current = true;
 			let url = "/api/videos/upload";
 			let postData = new FormData();
 			postData.append("title", data.title);
@@ -25,7 +30,10 @@ export default function Upload({user}) {
 			const response = await axios.post(url, postData);
 			console.log(response);
 			alert("Video uploaded successfully!");
+            navigate('/');
 		} catch (e) {
+            uploadDisabled.current = false;
+            alert("Failed to upload!");
 			console.log(e);
 		}
 	}
@@ -95,7 +103,7 @@ export default function Upload({user}) {
 
 				<br />
 
-				<input className='upload-btn' value='UPLOAD' type='submit' />
+				<input disabled={uploadDisabled.current} className='upload-btn' value={uploadDisabled.current ? 'UPLOADING':'UPLOAD'} type='submit' />
 			</form>
 		</div>
 	);
