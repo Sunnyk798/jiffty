@@ -39,9 +39,9 @@ router.get("/:id", authorize, async(req, res) => {
         const {updatedAt, ...other} = user._doc;
         const response = {profile: other};
         if(other.followers.includes(req.authUser.id)){
-            response.isfollowing = true;
+            response.isFollowing = true;
         } else {
-            response.isfollowing = false;
+            response.isFollowing = false;
         }
         res.status(200).json(response);
     } catch(err) {
@@ -50,28 +50,44 @@ router.get("/:id", authorize, async(req, res) => {
     }
 })
 
-router.get("/:id/follow", async(req, res) => {
+router.get("/:id/follow", authorize, async(req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, {
-            $push: {following: []}
+        const session = await User.startSession();
+        await session.withTransaction(() => {
+            return User.findByIdAndUpdate(req.params.id, {
+                $push: {followers: req.authUser._id}
+            });
         });
-        res.status(200).json(user);
+        await session.withTransaction(() => {
+            return User.findByIdAndUpdate(req.authUser.id, {
+                $push: {following: req.params.id}
+            });
+        });
+        session.endSession();
+        res.status(200).json({isFollowing : true});
     } catch(err) {
         res.status(500).json(err);
     }
 })
 
-router.get("/:id/unfollow", async(req, res) => {
+router.get("/:id/unfollow", authorize, async(req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, {
-            $set: {following: []}
+        const session = await User.startSession();
+        await session.withTransaction(() => {
+            return User.findByIdAndUpdate(req.params.id, {
+                $pull: {followers: req.authUser._id}
+            });
         });
-        res.status(200).json(other);
+        await session.withTransaction(() => {
+            return User.findByIdAndUpdate(req.authUser.id, {
+                $pull: {following: req.params.id}
+            });
+        });
+        session.endSession();
+        res.status(200).json({isFollowing : false});
     } catch(err) {
         res.status(500).json(err);
     }
 })
-
-
 
 module.exports = router;

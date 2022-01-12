@@ -8,6 +8,7 @@ module.exports = function connectDB() {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useCreateIndex: true,
+            useFindAndModify: false
 		},
 		err => {
 			if (err) console.log("DB connection failed...");

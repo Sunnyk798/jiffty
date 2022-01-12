@@ -19,11 +19,39 @@ export default function Profile({ user }) {
         })
 			.then(res => res.json())
 			.then(result => {
-				console.log(result);
                 setProfile(result.profile);
                 setIsFollowing(result.isFollowing);
 			});
     },[token, params.id])
+
+
+    const followUser = () => {
+        fetch("/api/users/"+profile._id+"/follow",{
+            headers : new Headers({ 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+token
+               })
+        })
+			.then(res => res.json())
+			.then(result => {
+                setIsFollowing(result.isFollowing);
+			});
+    }
+
+    const unfollowUser = () => {
+        fetch("/api/users/"+profile._id+"/unfollow",{
+            headers : new Headers({ 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+token
+               })
+        })
+			.then(res => res.json())
+			.then(result => {
+                setIsFollowing(result.isFollowing);
+			});
+    }
 
     if(!profile) return <Loading />;
 	return (
@@ -43,9 +71,8 @@ export default function Profile({ user }) {
                             <button className="grey-btn">Edit Profile</button>
                         ) : (
                             isFollowing ? 
-                            <button className="grey-btn">Unfollow</button>:
-                            <button className="follow-btn">Follow</button>
-
+                            <button onClick={unfollowUser} className="grey-btn">Unfollow</button>:
+                            <button onClick={followUser} className="follow-btn">Follow</button>
                         )
                     }
                 </div>
