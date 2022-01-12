@@ -26,7 +26,27 @@
 }
 
 .player .desc, .author {
-    padding: 1em;
+    padding: 1em 2em;
+    max-width: 800px;
+    margin: auto;
+}
+
+.player .desc {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.player .icons > * {
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 0.6em;
+    color: var(--green);
+    cursor: pointer;
+}
+
+.player .icons {
+    font-size: 0.9rem;
 }
 
 .player .title {
@@ -37,10 +57,17 @@
 .player .author{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
-.player .stat {
+.player .author .author-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.5em;
+}
+
+.player .author span {
     font-size: 0.8rem;
+    margin-top: 0.5em;
 }
 
 .player .avatar {

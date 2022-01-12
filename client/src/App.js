@@ -25,7 +25,7 @@ function App() {
                     <Route path='/' element={<VideoList token={authUser.token} title='Latest Videos' />} />
                     <Route path="/watch/:id" element={<VideoPage token={authUser.token} />} />
                     <Route path='/profile/:id' element={<Profile user={authUser} />} />
-                    <Route path='/saved' element={<VideoList title='Saved Videos' />} />
+                    <Route path='/saved' element={<VideoList token={authUser.token} title='Saved Videos' />} />
                     <Route path='/upload' element={<Upload user={authUser._id} />} />
                     {/* <Route path='/logout' element={<VideoList title='Latest Videos' />} /> */}
                 </Routes>

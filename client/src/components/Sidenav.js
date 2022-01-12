@@ -1,7 +1,7 @@
 import {
 	AiOutlineHome,
 	AiOutlineUser,
-	AiOutlineHeart,
+	AiOutlineClockCircle,
 	AiOutlineLogout,
 	AiOutlineUpload,
 } from "react-icons/ai";
@@ -28,7 +28,7 @@ export default function Sidenav({user}) {
 			</Link>
 
 			<Link to="/saved">
-				<AiOutlineHeart className='icon' />
+				<AiOutlineClockCircle className='icon' />
 				<small>Saved</small>
 			</Link>
 

@@ -15,10 +15,6 @@ const UserSchema = mongoose.Schema({
         default: "...",
         max: 100
     },
-    subscribers: {
-        type: Number,
-        default: 0,
-    },
     profilePicture: {
         type: String,
         default: "https://i.pinimg.com/originals/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg"
