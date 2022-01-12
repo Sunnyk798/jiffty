@@ -39,7 +39,7 @@ export default function Profile({ user }) {
                         <span> {profile.following.length}</span> Following
                     </div>
                     {
-                        (user._id == profile._id) ? (
+                        (user._id === profile._id) ? (
                             <button className="grey-btn">Edit Profile</button>
                         ) : (
                             isFollowing ? 
