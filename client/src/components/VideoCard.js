@@ -17,7 +17,7 @@ export default function VideoCard({ video }) {
 		<div className="videoCard">
 			<div className='poster' onClick={handleVideoPlay}>
                 <AiFillPlayCircle className="playicon" />
-				<video src={getUrl(video.videoPath)}/>
+				<video src={getUrl(video.videoPath)} preload="metadata" />
 			</div>
 			<p className='title'>{video.title}</p>
 			<small>{new Date(video.createdAt).toDateString()}</small>

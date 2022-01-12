@@ -10,9 +10,9 @@ const VideoSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		views: {
-			type: Number,
-			default: 92,
+		likes: {
+			type: Array,
+            default: []
 		},
         author: {
             type: String,

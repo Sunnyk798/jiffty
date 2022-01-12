@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const ffmpeg = require('ffmpeg');
 const User = require("../models/User");
 const Video = require("../models/Video");
 const { initializeApp, cert } = require("firebase-admin/app");
@@ -20,12 +21,13 @@ const bucket = getStorage().bucket();
 const storage = multer.memoryStorage({
 	destination: (req, file, cb) => {
 		cb(null, "");
-	},
-	filename: (req, file, cb) => {
-		const { originalname } = file;
-		cb(null, `${Date.now()}-${originalname}`);
-	},
+	}
 });
+
+const filename = (file) => {
+    const { originalname } = file;
+    return `${Date.now()}-${originalname}`;
+}
 
 const upload = multer({ storage });
 const videoQueue = [];
@@ -37,7 +39,13 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 			console.log("No file");
 			return res.json({ err: "No file" });
 		}
-
+        req.file.filename = filename(req.file);
+        
+        const thumb = new ffmpeg(req.file.filename).takeScreenshots({
+            count: 1,
+            timemarks: ['2']
+        }, '/media')
+        
         const blob = bucket.file(req.file.filename);
         const blobWriter = blob.createWriteStream({
             metadata: {
@@ -45,7 +53,9 @@ router.post("/upload", upload.single("video"), async (req, res) => {
             }
          })
          blobWriter.on('error', (err) => {
-            res.send(err)
+            if(err){
+                return res.status(500).send(err)
+            }
          })
 
          blobWriter.on('finish', () => {
