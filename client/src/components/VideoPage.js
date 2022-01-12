@@ -1,4 +1,5 @@
 import { AiFillPlayCircle } from "react-icons/ai";
+import Loading from "./Loading";
 import "./VideoPage.css";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from 'react-router-dom';
@@ -7,7 +8,7 @@ function getUrl(name){
     return `https://firebasestorage.googleapis.com/v0/b/jiffty.appspot.com/o/${name}?alt=media`
 }
 
-export default function VideoPage() {
+export default function VideoPage({token}) {
     const [currentVideo, setCurrentVideo] = useState(null);
 
     let params = useParams();
@@ -15,10 +16,11 @@ export default function VideoPage() {
         async function fecthData(){
             try {
                 const response = await fetch(`/api/videos/${params.id}`, {
-                    headers : { 
+                    headers : new Headers({ 
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                       }
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+token
+                    })
                 });
                 const video = await response.json();
                 if(video){
@@ -29,7 +31,7 @@ export default function VideoPage() {
             }
         }
         fecthData();
-    },[params.id])
+    },[params.id, token])
 
     const vidRef = useRef(null);
 
@@ -47,7 +49,7 @@ export default function VideoPage() {
             setPlaying(true);
         }
     }
-    if(!currentVideo) return <div> Loading ... </div>
+    if(!currentVideo) return <Loading />
 
     return (
         <div className="player">

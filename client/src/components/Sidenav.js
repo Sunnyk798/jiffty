@@ -8,7 +8,13 @@ import {
 import "./Sidenav.css";
 import { Link } from "react-router-dom";
 
-export default function Sidenav() {
+export default function Sidenav({user}) {
+    const myProfile = "/profile/"+user._id;
+
+    const handleLogout = () => {
+        localStorage.removeItem('jifftyAuth')
+    }
+
 	return (
 		<div className='sidenav'>
 			<Link to="/">
@@ -16,7 +22,7 @@ export default function Sidenav() {
 				<small>Home</small>
 			</Link>
 
-			<Link to="/profile">
+			<Link to={myProfile}>
 				<AiOutlineUser className='icon' />
 				<small>Profile</small>
 			</Link>
@@ -26,7 +32,7 @@ export default function Sidenav() {
 				<small>Saved</small>
 			</Link>
 
-			<a href="/">
+			<a onClick={handleLogout} href="/">
 				<AiOutlineLogout className='icon' />
 				<small>Logout</small>
 			</a>

@@ -8,6 +8,7 @@ const { initializeApp, cert } = require("firebase-admin/app");
 const { getStorage } = require("firebase-admin/storage");
 const { getFirestore } = require("firebase-admin/firestore");
 const serviceAccount = require("../jiffty-service-account.json");
+const authorize = require('../middlewares/auth');
 
 // ---- Firebase Setup ----
 initializeApp({
@@ -95,7 +96,7 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 // }
 
 
-router.get("/", async (req, res) => {
+router.get("/", authorize,  async (req, res) => {
 	try {
 		const videos = await Video.find();
 		res.json(videos);
@@ -105,7 +106,7 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authorize, async (req, res) => {
 	try {
 		const video = await Video.findById(req.params.id);
 		var result = video._doc;

@@ -35,6 +35,56 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.loading {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+}
+
+.loading span {
+    font-weight: bold;
+    font-size: 1.5rem;
+    animation: scale-loading .7s infinite alternate;
+}
+
+.loading > *:nth-child(0){
+    animation-delay: 0s;
+}
+.loading > *:nth-child(1){
+    animation-delay: 0.1s;
+}
+.loading > *:nth-child(2){
+    animation-delay: 0.2s;
+}
+.loading > *:nth-child(3){
+    animation-delay: 0.3s;
+}
+.loading > *:nth-child(4){
+    animation-delay: 0.4s;
+}
+.loading > *:nth-child(5){
+    animation-delay: 0.5s;
+}
+.loading > *:nth-child(6){
+    animation-delay: 0.6s;
+}
+.loading > *:nth-child(7){
+    animation-delay: 0.7s;
+}
+
+@keyframes scale-loading {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(.8);
+    }
+}
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
