@@ -10,6 +10,9 @@ const { getFirestore } = require("firebase-admin/firestore");
 const serviceAccount = require("../jiffty-service-account.json");
 const authorize = require('../middlewares/auth');
 
+const comment = require('./comment');
+router.use('/comment', comment);
+
 // ---- Firebase Setup ----
 initializeApp({
 	credential: cert(serviceAccount),

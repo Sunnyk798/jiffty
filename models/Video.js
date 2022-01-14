@@ -15,8 +15,9 @@ const VideoSchema = mongoose.Schema(
             default: []
 		},
         author: {
-            type: String,
-            required: true
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
         },
 		videoPath: {
 			type: String,

@@ -1,5 +1,6 @@
 import { AiFillPlayCircle, AiOutlineLike, AiFillLike, AiOutlineClockCircle, AiFillClockCircle } from "react-icons/ai";
 import Loading from "./Loading";
+import CommentList from "./CommentList";
 import "./VideoPage.css";
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
@@ -8,7 +9,8 @@ function getUrl(name){
     return `https://firebasestorage.googleapis.com/v0/b/jiffty.appspot.com/o/${name}?alt=media`
 }
 
-export default function VideoPage({token}) {
+export default function VideoPage({user}) {
+    const token = user.token;
     const [currentVideo, setCurrentVideo] = useState(null);
 
     let params = useParams();
@@ -91,6 +93,7 @@ export default function VideoPage({token}) {
                 </div>
                 <button onClick={() => {navigate('/profile/'+currentVideo.author._id)}} className="grey-btn">View Profile</button>
             </div>
+            <CommentList user={user} videoId={params.id} />
             <div className="sized-box"></div>
             <div className="sized-box"></div>
             <div className="sized-box"></div>
