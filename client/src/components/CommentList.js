@@ -45,7 +45,7 @@ export default function CommentList({user, videoId}) {
 
     const ShowComment = ({comments}) => {
         console.log(comments)
-        if(!comments || comments === []) return "No comments to show"
+        if(!comments || comments == []) return "No comments to show"
         return (
             <div className='comments'>
                 {comments && comments.map(comment => {
@@ -53,6 +53,7 @@ export default function CommentList({user, videoId}) {
                         <div key={comment._id} className='flex'>
                             <img src={comment.author.profilePicture} alt='avatar' />
                             <div>
+                                <p className='bold'>{comment.author.name}</p>
                                 <small>{new Date(comment.createdAt).toLocaleString()}</small>
                                 <p>{comment.text}</p>
                             </div>

@@ -34,3 +34,13 @@
 .comments p {
     margin: 0.2em auto;
 }
+
+.comments small {
+    font-size: 0.75rem;
+    color: var(--grey);
+}
+
+.bold {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
