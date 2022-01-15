@@ -111,7 +111,11 @@ router.get("/", authorize,  async (req, res) => {
 
 router.get("/:id", authorize, async (req, res) => {
 	try {
-		const video = await Video.findById(req.params.id);
+		const video = await Video.findByIdAndUpdate(req.params.id,{
+            $inc: {
+                views: 1
+            }
+        });
 		var result = video._doc;
         const author = await User.findById(result.author);
         result.author = author._doc;

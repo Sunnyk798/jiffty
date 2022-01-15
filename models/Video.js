@@ -14,6 +14,10 @@ const VideoSchema = mongoose.Schema(
 			type: Array,
             default: []
 		},
+		views: {
+			type: Number,
+            default: 1
+		},
         author: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
