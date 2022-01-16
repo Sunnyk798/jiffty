@@ -1,8 +1,9 @@
 import "./Topnav.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { AiOutlineMenu } from 'react-icons/ai'
 
-export default function Topnav() {
+export default function Topnav({navShow, setNavShow}) {
     const navigate = useNavigate();
     const [term, setTerm] = useState("")
 
@@ -15,8 +16,13 @@ export default function Topnav() {
         navigate('/search/'+term);
     }
 
+    function handleSidenav(){
+        setNavShow(!navShow);
+    }
+
 	return (
 		<div className='navbar'>
+            <div onClick={handleSidenav} className='hamburger'><AiOutlineMenu /></div>
 			<div className='brand'>Jiffty</div>
             <form onSubmit={searchHandler}>
                 <input value={term} onChange={(e)=>{setTerm(e.target.value)}} type='text' placeholder='Search' className='searchbar' />

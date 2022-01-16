@@ -13,15 +13,16 @@ import Search from "./components/Search";
 
 function App() {
     const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('jifftyAuth')));
+    const [navShow, setNavShow] = useState(false);
 
 	if (!authUser) return <Login auth={auth} setAuthUser={setAuthUser} />;
 	
     return (
 		<div className='App'>
             <BrowserRouter>
-			<Topnav />
+			<Topnav navShow={navShow} setNavShow={setNavShow} />
 			<div className='container'>
-				<Sidenav user={authUser} />
+				<Sidenav user={authUser} navShow={navShow} />
 				<Routes>
                     <Route path='/' element={<VideoList token={authUser.token} title='Latest Videos' />} />
                     <Route path='/search/:term' element={<Search token={authUser.token} />} />

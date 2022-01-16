@@ -48,3 +48,46 @@
 		font-weight: normal;
 	}
 }
+
+.hamburger {
+    color: black;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 400px){
+    .hamburger {
+        display: unset;
+    }
+
+    .container {
+        grid-template-columns: auto;
+    }
+
+    .sidenav {
+        width: 160px;
+        position: absolute;
+        transition: all 0.4s ease; 
+        z-index: 100;
+    }
+
+    .sidenav > a {
+		place-items: unset;
+		align-items: center;
+		grid-template-columns: 60px auto;
+	}
+
+	.sidenav .icon {
+		margin: 0 auto;
+	}
+
+	.sidenav small {
+		font-size: 1rem;
+		font-weight: normal;
+	}
+
+    .hide {
+        transform: translateX(-160px);
+    }
+}

@@ -36,6 +36,12 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+@media (max-width: 800px) {
+    body {
+        font-size: 90%;
+    }
+}
+
 .loading {
     height: 100%;
     width: 100%;

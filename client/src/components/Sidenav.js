@@ -8,15 +8,15 @@ import {
 import "./Sidenav.css";
 import { Link } from "react-router-dom";
 
-export default function Sidenav({user}) {
+export default function Sidenav({navShow, user}) {
     const myProfile = "/profile/"+user._id;
 
     const handleLogout = () => {
         localStorage.removeItem('jifftyAuth')
     }
-
+    console.log(navShow)
 	return (
-		<div className='sidenav'>
+		<div className={'sidenav '+ (navShow ? '':'hide')}>
 			<Link to="/">
 				<AiOutlineHome className='icon' />
 				<small>Home</small>
