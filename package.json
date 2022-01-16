@@ -6,7 +6,7 @@
 	"homepage": "http://localhost:5050/",
 	"scripts": {
 		"start": "node server.js",
-        "server": "nodemon server.js",
+		"server": "nodemon server.js",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
 		"dev": "concurrently \"npm run server\" \"cd client && npm start\"",
 		"test": "echo \"Error: no test specified\" && exit 1"

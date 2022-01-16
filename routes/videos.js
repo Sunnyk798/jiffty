@@ -101,11 +101,22 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 
 router.get("/", authorize,  async (req, res) => {
 	try {
-		const videos = await Video.find();
+		const videos = await Video.find({}).sort({created: -1}).exec();
 		res.json(videos);
 	} catch (e) {
 		console.log(e);
-		res.status(400).json({ err: e });
+		res.status(500).json({ err: e });
+	}
+});
+
+router.get("/search/:term", authorize,  async (req, res) => {
+	try {
+        const term = req.params.term;
+		const videos = await Video.find({$text: {$search: term}}).populate('author').limit(10).exec();
+		res.json(videos);
+	} catch (e) {
+		console.log(e);
+		res.status(500).json({ err: e });
 	}
 });
 

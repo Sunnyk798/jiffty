@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Upload from "./components/Upload";
 import { auth } from './config/firebase-config'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Search from "./components/Search";
 
 function App() {
     const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('jifftyAuth')));
@@ -23,11 +24,11 @@ function App() {
 				<Sidenav user={authUser} />
 				<Routes>
                     <Route path='/' element={<VideoList token={authUser.token} title='Latest Videos' />} />
+                    <Route path='/search/:term' element={<Search token={authUser.token} />} />
                     <Route path="/watch/:id" element={<VideoPage user={authUser} />} />
                     <Route path='/profile/:id' element={<Profile user={authUser} />} />
                     <Route path='/saved' element={<VideoList token={authUser.token} title='Saved Videos' />} />
                     <Route path='/upload' element={<Upload user={authUser._id} />} />
-                    {/* <Route path='/logout' element={<VideoList title='Latest Videos' />} /> */}
                 </Routes>
 			</div>
             </BrowserRouter>

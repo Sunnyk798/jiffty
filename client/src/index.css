@@ -16,6 +16,7 @@
 	--grey: #303038;
 	--white: #1c1c1e;
 	--green: rgb(14, 182, 22);
+    --light-green: rgba(14, 182, 22, 0.356);
 	--danger: rgb(224, 34, 34);
 }
 
