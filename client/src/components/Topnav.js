@@ -6,7 +6,8 @@ export default function Topnav() {
     const navigate = useNavigate();
     const [term, setTerm] = useState("")
 
-    const searchHandler = () => {
+    const searchHandler = (e) => {
+        e.preventDefault();
         if(term === ""){
             alert("Type Something!");
             return;
