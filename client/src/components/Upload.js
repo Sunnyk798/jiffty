@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import axios from "axios";
@@ -14,6 +14,7 @@ export default function Upload({user}) {
 	} = useForm();
     const uploadDisabled = useRef(false);
     const navigate = useNavigate();
+    const [progress, setProgress] = useState(0);
 
 	const currentFile = watch("video");
 
@@ -27,7 +28,12 @@ export default function Upload({user}) {
 			postData.append("video", data.video[0]);
             postData.append('author', user)
 
-			const response = await axios.post(url, postData);
+			const response = await axios.post(url, postData,{
+                onUploadProgress: (progressEvent) => {
+                    const progress = (progressEvent.loaded / progressEvent.total) * 100;
+                    setProgress(progress);
+                },    
+            });
 			console.log(response);
 			alert("Video uploaded successfully!");
             navigate('/');
@@ -102,7 +108,7 @@ export default function Upload({user}) {
 				{errors.description && <small>{errors.description.message}</small>}
 
 				<br />
-
+                {uploadDisabled.current && <span>Uploading : {progress} %</span>}
 				<input disabled={uploadDisabled.current} className='upload-btn' value={uploadDisabled.current ? 'UPLOADING':'UPLOAD'} type='submit' />
 			</form>
 		</div>

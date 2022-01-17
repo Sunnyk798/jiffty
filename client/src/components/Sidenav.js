@@ -14,7 +14,6 @@ export default function Sidenav({navShow, user}) {
     const handleLogout = () => {
         localStorage.removeItem('jifftyAuth')
     }
-    console.log(navShow)
 	return (
 		<div className={'sidenav '+ (navShow ? '':'hide')}>
 			<Link to="/">
