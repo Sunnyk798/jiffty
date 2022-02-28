@@ -4,6 +4,7 @@ const multer = require("multer");
 const ffmpeg = require('ffmpeg');
 const User = require("../models/User");
 const Video = require("../models/Video");
+const Notification = require("../models/Notification");
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getStorage } = require("firebase-admin/storage");
 const { getFirestore } = require("firebase-admin/firestore");
@@ -74,6 +75,13 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 	    // if (isUploaderFree) uploadToCloud(videoQueue);
 		const video = new Video(videoData);
 		await video.save();
+        const notification = new Notification({
+            actor: req.authUser.name,
+            action: "uploaded a new video.",
+            by: req.authUser._id,
+            url: "/watch/"+videoData._id
+        });
+        notification.save();
 		res.send("ok");
 	} catch (e) {
 		console.log("here", e);

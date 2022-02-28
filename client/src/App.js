@@ -20,7 +20,7 @@ function App() {
     return (
 		<div className='App'>
             <BrowserRouter>
-			<Topnav navShow={navShow} setNavShow={setNavShow} />
+			<Topnav navShow={navShow} setNavShow={setNavShow} user={authUser} />
 			<div className='container'>
 				<Sidenav user={authUser} navShow={navShow} />
 				<Routes>
