@@ -1,31 +1,44 @@
 import "./Notification.css"
+import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
 
 function Bar({item}) {
     return (
-        <a className="noti-bars" href={item.url}>
+        <Link className="noti-bars" to={item.url}>
             <span className="actor">{item.actor}</span>
             <span className="action"> {item.action}</span>
             <span className="time"> {item.createdAt}</span>
-        </a>
+        </Link>
     )
 }
 
 function Notification({user, noti}) {
-    let item = {
-        url:"/",
-        actor:"Gunjan",
-        action:"posted a new video.",
-        createdAt:"1 day ago"
-    }
+    const [notifications, setNotifications] = useState([])
+
+    useEffect(() => {
+        fetch("/api/users/notifications",{
+            headers : new Headers({ 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+ user.token
+               })
+        })
+			.then(res => res.json())
+			.then(result => {
+                console.log(result)
+                setNotifications(result)
+			});
+    },[user.token])
+
   return (
     <div className={noti?"notification":"notification hide-noti"}>
         <h3>Notifications</h3>
         <div>
-            <Bar item={item} />
-            <Bar item={item} />
-            <Bar item={item} />
-            <Bar item={item} />
-            <Bar item={item} />
+            {
+                notifications.map((item) => {
+                    return <Bar item={item} />
+                })
+            }
         </div>
     </div>
   )

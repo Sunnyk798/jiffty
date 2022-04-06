@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const User = require("../models/User");
+const Notification = require("../models/Notification")
 const authorize = require("../middlewares/auth")
 
 router.post("/register", async(req, res) => {
@@ -21,6 +22,17 @@ router.post("/register", async(req, res) => {
         res.status(200).json({...user, token});
     } catch (err) {
         res.status(500).send(err);
+    }
+})
+
+router.get("/notifications", authorize, async(req, res) => {
+    try {
+        // const noti = []
+        const noti = await Notification.find().limit(8).exec()
+        // const noti = await Notification.find({$or: [{for: req.authUser._id}, {by: {$in: req.authUser.following}}]}).limit(8).exec();
+        return res.status(200).json(noti);
+    } catch(err){
+        res.status(500).json(err);
     }
 })
 

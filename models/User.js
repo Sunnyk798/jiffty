@@ -31,10 +31,7 @@ const UserSchema = mongoose.Schema({
         type: Array,
         default: []
     },
-    saved: {
-        type: Array,
-        default: []
-    }
+    saved: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Video' }]
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", UserSchema);

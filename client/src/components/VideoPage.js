@@ -15,6 +15,7 @@ export default function VideoPage({user}) {
 
     let params = useParams();
     useEffect(() => {
+        console.log(params)
         async function fecthData(){
             try {
                 const response = await fetch(`/api/videos/${params.id}`, {

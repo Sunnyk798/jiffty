@@ -26,17 +26,17 @@ export default function Upload({user}) {
 			postData.append("title", data.title);
 			postData.append("description", data.description);
 			postData.append("video", data.video[0]);
-            postData.append('author', user)
+            postData.append('author', JSON.stringify(user))
 
 			const response = await axios.post(url, postData,{
                 onUploadProgress: (progressEvent) => {
                     const progress = (progressEvent.loaded / progressEvent.total) * 100;
-                    setProgress(progress);
+                    setProgress(progress.toFixed(2));
                 },    
             });
 			console.log(response);
 			alert("Video uploaded successfully!");
-            navigate('/');
+            navigate('/')
 		} catch (e) {
             uploadDisabled.current = false;
             alert("Failed to upload!");

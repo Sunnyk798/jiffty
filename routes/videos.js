@@ -12,7 +12,9 @@ const serviceAccount = require("../jiffty-service-account.json");
 const authorize = require('../middlewares/auth');
 
 const comment = require('./comment');
+const save = require('./save');
 router.use('/comment', comment);
+router.use('/save', save);
 
 // ---- Firebase Setup ----
 initializeApp({
@@ -69,16 +71,19 @@ router.post("/upload", upload.single("video"), async (req, res) => {
          })
          blobWriter.end(req.file.buffer);
 
+        var authUser = JSON.parse(req.body.author);
+        console.log(authUser)
 		const videoData = req.body;
 		videoData.videoPath = req.file.filename;
+        videoData.author = authUser._id
         // videoQueue.push(videoData.videoPath);
 	    // if (isUploaderFree) uploadToCloud(videoQueue);
 		const video = new Video(videoData);
 		await video.save();
         const notification = new Notification({
-            actor: req.authUser.name,
+            actor: authUser.name,
             action: "uploaded a new video.",
-            by: req.authUser._id,
+            by: authUser._id,
             url: "/watch/"+videoData._id
         });
         notification.save();
@@ -109,7 +114,7 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 
 router.get("/", authorize,  async (req, res) => {
 	try {
-		const videos = await Video.find({}).sort({created: -1}).exec();
+		const videos = await Video.find({}).sort({createdAt: -1}).exec();
 		res.json(videos);
 	} catch (e) {
 		console.log(e);

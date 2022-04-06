@@ -29,7 +29,7 @@ function App() {
                     <Route path="/watch/:id" element={<VideoPage user={authUser} />} />
                     <Route path='/profile/:id' element={<Profile user={authUser} />} />
                     <Route path='/saved' element={<VideoList token={authUser.token} title='Saved Videos' />} />
-                    <Route path='/upload' element={<Upload user={authUser._id} />} />
+                    <Route path='/upload' element={<Upload user={authUser} />} />
                 </Routes>
 			</div>
             </BrowserRouter>
