@@ -76,17 +76,20 @@ router.post("/upload", upload.single("video"), async (req, res) => {
 		const videoData = req.body;
 		videoData.videoPath = req.file.filename;
         videoData.author = authUser._id
+        
         // videoQueue.push(videoData.videoPath);
 	    // if (isUploaderFree) uploadToCloud(videoQueue);
 		const video = new Video(videoData);
-		await video.save();
-        const notification = new Notification({
-            actor: authUser.name,
-            action: "uploaded a new video.",
-            by: authUser._id,
-            url: "/watch/"+videoData._id
+		await video.save(function(err, createdVideo){
+            const notification = new Notification({
+                actor: authUser.name,
+                action: "uploaded a new video.",
+                by: authUser._id,
+                url: "/watch/"+createdVideo._id
+            });
+            notification.save();
         });
-        notification.save();
+        
 		res.send("ok");
 	} catch (e) {
 		console.log("here", e);
